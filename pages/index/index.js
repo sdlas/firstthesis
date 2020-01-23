@@ -26,14 +26,22 @@ Page({
     currentid: 0,
     showadd: false,//是否显示增加元件的窗口
     showaddk: false,//是否显示受控源
-    itemlist:[
-      { id: '0', num: '10+0', nodestart: '1', nodeend: '2', whichname: '', shownum: '10' },
-      { id: '0', num: '8+0', nodestart: '1', nodeend: '3', whichname: '', shownum: '8' },
-      { id: '0', num: '15+0', nodestart: '2', nodeend: '3', whichname: '', shownum: '15' },
-      { id: '0', num: '5+0', nodestart: '0', nodeend: '2', whichname: '', shownum: '5' },
-      { id: '1', num: '12+0', nodestart: '0', nodeend: '1', shownum: '12' },
-      { id: '7', num1: '8+0', num2: '1+0', nodestart: '0', nodeend: '3', knodestart: '3', knodeend: '1',shownum: '1' },
-    ],
+    itemlist:[],
+    // itemlist:[
+    //   { id: '0', num: '1+0', nodestart: '1', nodeend: '2', whichname: '', shownum: '1' },
+    //   { id: '0', num: '0+60', nodestart: '2', nodeend: '3', whichname: 'L', shownum: '1' },
+    //   { id: '0', num: '1+0', nodestart: '0', nodeend: '3', whichname: '', shownum: '1' },
+    //   { id: '0', num: '0+-0.0083333', nodestart: '0', nodeend: '2', whichname: 'C', shownum: '2' },
+    //   { id: '1', num: '100+0', nodestart: '0', nodeend: '1', shownum: '100' },
+    // ],
+    // itemlist:[
+    //   { id: '0', num: '10+0', nodestart: '1', nodeend: '2', whichname: '', shownum: '10' },
+    //   { id: '0', num: '8+0', nodestart: '1', nodeend: '3', whichname: '', shownum: '8' },
+    //   { id: '0', num: '15+0', nodestart: '2', nodeend: '3', whichname: '', shownum: '15' },
+    //   { id: '0', num: '5+0', nodestart: '0', nodeend: '2', whichname: '', shownum: '5' },
+    //   { id: '1', num: '12+0', nodestart: '0', nodeend: '1', shownum: '12' },
+    //   { id: '7', num1: '8+0', num2: '1+0', nodestart: '0', nodeend: '3', knodestart: '3', knodeend: '1',shownum: '1' },
+    // ],//含受控源的电路
     // itemlist:[
     //   {id:'0',num:'2+0',nodestart:'2',nodeend:'3',whichname:'',shownum:'2'},
     //   { id: '0', num: '2+0', nodestart: '3', nodeend: '1', whichname: '', shownum: '2' },
@@ -56,14 +64,15 @@ Page({
   },
   begincal:function(){//开始计算
     var that = this
-    
     var result = that.calculate(that.data.itemlist, that.data.nodenum)
+    console.log("it is",result)
     var showresult = new Array()
     for (let i = 0; i < result.length; i++) {
       showresult[i] = new Array()
       result[i][0] = v.tofixed(result[i][0])
-      showresult[i][0] = v.size(result[i][0]) + 'V   ' + v.deg(result[i][0]) + '°'
+      showresult[i][0] = v.size(result[i][0]).toFixed(2) + 'V   ' + v.deg(result[i][0]).toFixed(2) + '°'
     }
+    console.log(showresult)
     that.setData({
       result: showresult,
     })
